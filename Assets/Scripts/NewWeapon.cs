@@ -2,7 +2,7 @@
 using UnityEngine;
 using TMPro;
 
-public class ProjectileGunTutorial : MonoBehaviour
+public class NewWeapon : MonoBehaviour
 {
     //bullet 
     public GameObject bullet;
@@ -50,7 +50,7 @@ public class ProjectileGunTutorial : MonoBehaviour
         if (ammunitionDisplay != null)
             ammunitionDisplay.SetText(bulletsLeft + " / " + magazineSize);
 
-        
+
     }
     private void MyInput()
     {
@@ -108,6 +108,7 @@ public class ProjectileGunTutorial : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot++;
+       
 
         //Invoke resetShot function (if not already invoked), with your timeBetweenShooting
         if (allowInvoke)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 
@@ -16,7 +17,6 @@ public class Weapon : MonoBehaviour
     public int mag = 5;
     public int ammo = 30;
     public int magAmmo = 30;
-
 
 
 
@@ -110,7 +110,7 @@ public class Weapon : MonoBehaviour
 
             Destroy(laser, 5f);
         }
-
+        
     }
     void Recoil()
     {

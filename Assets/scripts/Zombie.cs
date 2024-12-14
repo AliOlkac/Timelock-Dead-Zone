@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using UnityEditor.EditorTools;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,38 +17,47 @@ public class Enemy : MonoBehaviour
     public Animator animator; // Animasyonların kontrolü için referans.
     public ParticleSystem hitEffect; // Düşman hasar aldığında oynayacak partikül efekti.
     public AudioSource alertSound; // Düşmanın oyuncuyu fark ettiğinde çalacak ses efekti.
-    
-    
+
+
     private Vector3 walkPoint; // Devriye noktası.
     private bool walkPointSet; // Devriye noktası ayarlandı mı?
     private bool alreadyAttacked; // Saldırı yapıldı mı?
     private bool takeDamage;  // Düşman hasar alıyor mu?
     private bool playerInSightRange, playerInAttackRange; // Oyuncu görüş ve saldırı menzilinde mi?
-    
- 
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>(); // Animasyon bileşenini alır.
         //player = GameObject.FindWithTag("Player").transform;
         navAgent = GetComponent<NavMeshAgent>(); // NavMeshAgent bileşenini alır.
-        
+
     }
-    
-    
+
+    public void TakeDamage(int _damage)
+    {
+        health -= _damage;
+
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
-        
+
     }
 
     private void Update()
     {
         CheckPlayerRange();
-        
-        
-        
+
+
+
     }
 
-    
+
     //Oyuncunun düşmanın görüş menzilinde olup olmadığını ve saldırı menzilinde olup olmadığını kontrol eder.
     private void CheckPlayerRange()
     {
@@ -76,7 +86,7 @@ public class Enemy : MonoBehaviour
             print("Chasing now");
         }
     }
-    
+
     //Düşmanın belirli bir alanda devriye gezmek için kullanacağı fonksiyon.
     private void Patroling() // Düşmanın devriye noktaları arasında hareket etmesini sağlar.
     {
@@ -97,9 +107,9 @@ public class Enemy : MonoBehaviour
         {
             walkPointSet = false;
         }
-        
+
     }
-    
+
     //Rastgele bir walkPoint belirler.Zemin üzerinde geçerli bir nokta olduğundan emin olmak için Physics.Raycast kullanır. 
     private void SearchWalkPoint() // Düşmanın devriye noktası belirlemesini sağlar.
     {
@@ -113,40 +123,40 @@ public class Enemy : MonoBehaviour
         }
     }
 
-   private void ChasePlayer() // Oyuncuyu takip etmek için kullanılan fonksiyon.
-{
-    navAgent.SetDestination(player.position);
-    animator.SetFloat("Velocity", 0.6f);
-    navAgent.isStopped = false; // Düşmanın hareket etmesini sağlar.
-}
-
-
-   private void AttackPlayer() // Oyuncuya saldırmak için kullanılan fonksiyon.
-{
-    navAgent.isStopped = true; // Hareketi durdur
-
-    if (!alreadyAttacked) // Düşmanın saldırı yapmadığından emin olur.
+    private void ChasePlayer() // Oyuncuyu takip etmek için kullanılan fonksiyon.
     {
-        transform.LookAt(player.position); // Oyuncuya bak
-        alreadyAttacked = true;
-        animator.SetBool("Attack", true);
-        Invoke(nameof(ResetAttack), timeBetweenAttacks);// Saldırılar arasında bekleme süresi.
+        navAgent.SetDestination(player.position);
+        animator.SetFloat("Velocity", 0.6f);
+        navAgent.isStopped = false; // Düşmanın hareket etmesini sağlar.
+    }
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange)) // Düşmanın saldırı menzilinde bir şey var mı kontrol eder.
+
+    private void AttackPlayer() // Oyuncuya saldırmak için kullanılan fonksiyon.
+    {
+        navAgent.isStopped = true; // Hareketi durdur
+
+        if (!alreadyAttacked) // Düşmanın saldırı yapmadığından emin olur.
         {
-            /*
-                YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
+            transform.LookAt(player.position); // Oyuncuya bak
+            alreadyAttacked = true;
+            animator.SetBool("Attack", true);
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);// Saldırılar arasında bekleme süresi.
 
-            PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
-            if (playerHUD != null)
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange)) // Düşmanın saldırı menzilinde bir şey var mı kontrol eder.
             {
-               playerHUD.takeDamage(damage);
+                /*
+                    YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
+
+                PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
+                if (playerHUD != null)
+                {
+                   playerHUD.takeDamage(damage);
+                }
+                 */
             }
-             */
         }
     }
-}
 
 
     private void ResetAttack() // Saldırıyı sıfırlar.
@@ -166,9 +176,9 @@ public class Enemy : MonoBehaviour
             StartCoroutine(DestroyEnemyCoroutine());
         }
 
-        
+
     }
-    
+
 
 
     private IEnumerator TakeDamageCoroutine() // Düşmanın hasar almasını kontrol eder.
