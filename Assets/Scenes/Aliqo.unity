@@ -162,7 +162,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -707,6 +708,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8300516844635183445, guid: 57c8a2e74cd59c54fa4bbc154af79e70, type: 3}
+      propertyPath: damage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300516844635183445, guid: 57c8a2e74cd59c54fa4bbc154af79e70, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1365395639}
@@ -716,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8300516844635183445, guid: 57c8a2e74cd59c54fa4bbc154af79e70, type: 3}
       propertyPath: attackRange
-      value: 1.7
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 8300516844635183445, guid: 57c8a2e74cd59c54fa4bbc154af79e70, type: 3}
       propertyPath: walkPointRange
@@ -815,6 +820,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4459864850019384736, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: m_LocalPosition.x
       value: 297.83
