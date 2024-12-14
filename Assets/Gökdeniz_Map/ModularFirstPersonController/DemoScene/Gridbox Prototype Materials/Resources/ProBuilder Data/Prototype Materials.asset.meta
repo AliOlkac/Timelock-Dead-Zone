@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 74985c2f683b3964b8d97e882fa3b6ab
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 189884
+  packageName: Modular First Person Controller
+  packageVersion: 1.0.1
+  assetPath: Assets/ModularFirstPersonController/DemoScene/Gridbox Prototype Materials/Resources/ProBuilder
+    Data/Prototype Materials.asset
+  uploadId: 428261
