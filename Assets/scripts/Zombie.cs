@@ -15,25 +15,44 @@ public class Enemy : MonoBehaviour
     public int damage; // Saldırıda oyuncuya verilen hasar miktarı.
     public Animator animator; // Animasyonların kontrolü için referans.
     public ParticleSystem hitEffect; // Düşman hasar aldığında oynayacak partikül efekti.
-
+    public AudioSource alertSound; // Düşmanın oyuncuyu fark ettiğinde çalacak ses efekti.
+    
+    
     private Vector3 walkPoint; // Devriye noktası.
     private bool walkPointSet; // Devriye noktası ayarlandı mı?
     private bool alreadyAttacked; // Saldırı yapıldı mı?
     private bool takeDamage;  // Düşman hasar alıyor mu?
+    private bool playerInSightRange, playerInAttackRange; // Oyuncu görüş ve saldırı menzilinde mi?
+    
  
     private void Awake()
     {
         animator = GetComponent<Animator>(); // Animasyon bileşenini alır.
         //player = GameObject.FindWithTag("Player").transform;
         navAgent = GetComponent<NavMeshAgent>(); // NavMeshAgent bileşenini alır.
+        
+    }
+    
+    
+    void Start()
+    {
+        
     }
 
     private void Update()
     {
+        CheckPlayerRange();
         
-        bool playerInSightRange = Vector3.Distance(transform.position, player.position) < sightRange; // Oyuncu düşmanın görüş menzilinde mi?
-        bool playerInAttackRange = Vector3.Distance(transform.position, player.position) < attackRange;  // Oyuncu düşmanın saldırı menzilinde mi?
         
+        
+    }
+
+    
+    //Oyuncunun düşmanın görüş menzilinde olup olmadığını ve saldırı menzilinde olup olmadığını kontrol eder.
+    private void CheckPlayerRange()
+    {
+        playerInSightRange = Vector3.Distance(transform.position, player.position) < sightRange;
+        playerInAttackRange = Vector3.Distance(transform.position, player.position) < attackRange;
         if (!playerInSightRange && !playerInAttackRange)
         {
             ResetAttack();
@@ -57,7 +76,7 @@ public class Enemy : MonoBehaviour
             print("Chasing now");
         }
     }
-
+    
     //Düşmanın belirli bir alanda devriye gezmek için kullanacağı fonksiyon.
     private void Patroling() // Düşmanın devriye noktaları arasında hareket etmesini sağlar.
     {
@@ -102,13 +121,13 @@ public class Enemy : MonoBehaviour
 }
 
 
-  private void AttackPlayer() // Oyuncuya saldırmak için kullanılan fonksiyon.
+   private void AttackPlayer() // Oyuncuya saldırmak için kullanılan fonksiyon.
 {
-    navAgent.SetDestination(transform.position);
+    navAgent.isStopped = true; // Hareketi durdur
 
     if (!alreadyAttacked) // Düşmanın saldırı yapmadığından emin olur.
     {
-        transform.LookAt(player.position);
+        transform.LookAt(player.position); // Oyuncuya bak
         alreadyAttacked = true;
         animator.SetBool("Attack", true);
         Invoke(nameof(ResetAttack), timeBetweenAttacks);// Saldırılar arasında bekleme süresi.
@@ -144,9 +163,13 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Invoke(nameof(DestroyEnemy), 0.5f);
+            StartCoroutine(DestroyEnemyCoroutine());
         }
+
+        
     }
+    
+
 
     private IEnumerator TakeDamageCoroutine() // Düşmanın hasar almasını kontrol eder.
     {
@@ -155,6 +178,11 @@ public class Enemy : MonoBehaviour
         takeDamage = false;
     }
 
+    public void PlayAlertSound()
+    {
+        if (!alertSound.isPlaying)
+            alertSound.Play();
+    }
     private void DestroyEnemy() // Düşmanı yok eder.
     {
         StartCoroutine(DestroyEnemyCoroutine());
