@@ -229,8 +229,8 @@ GameObject:
   - component: {fileID: 9172166041081384715}
   - component: {fileID: 7616363783801975953}
   - component: {fileID: 4245789455621105026}
-  - component: {fileID: 4196309760371489940}
-  - component: {fileID: 2367781601455727742}
+  - component: {fileID: 923867424143024428}
+  - component: {fileID: 1345604724910608065}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -321,32 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 5
   sprintSpeed: 8
---- !u!143 &4196309760371489940
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4820535922083847229}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2367781601455727742
+--- !u!54 &923867424143024428
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,6 +348,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &1345604724910608065
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4820535922083847229}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &358716054040689353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 4482122182200028216, guid: fd175489a704b9a43958477bcbbf5318, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 2637017407665445955, guid: 05eb603f570ed3249b822e0a74a8dd21, type: 3}
+      objectReference: {fileID: 4877713809593290297, guid: 8d2e72494ea030c4fa3570cff8e49303, type: 3}
     - target: {fileID: 4482122182200028216, guid: fd175489a704b9a43958477bcbbf5318, type: 3}
       propertyPath: fpsCam
       value: 
@@ -442,12 +440,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4482122182200028216, guid: fd175489a704b9a43958477bcbbf5318, type: 3}
-      propertyPath: playerRb
-      value: 
-      objectReference: {fileID: 2367781601455727742}
-    - target: {fileID: 4482122182200028216, guid: fd175489a704b9a43958477bcbbf5318, type: 3}
       propertyPath: shootForce
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4482122182200028216, guid: fd175489a704b9a43958477bcbbf5318, type: 3}
       propertyPath: muzzleFlash
