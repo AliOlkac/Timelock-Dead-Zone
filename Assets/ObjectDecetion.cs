@@ -7,7 +7,10 @@ public class ObjectDecetion : MonoBehaviour
         if (other.transform.GetComponent<Enemy>())
         {
             var enemy = other.transform.GetComponent<Enemy>();
-            enemy.TakeDamage(10);
+            enemy.TakeDamage(25);
+
+
         }
+
     }
 }
