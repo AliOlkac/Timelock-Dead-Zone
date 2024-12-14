@@ -8,9 +8,8 @@ public class ObjectDecetion : MonoBehaviour
         {
             var enemy = other.transform.GetComponent<Enemy>();
             enemy.TakeDamage(25);
-
-
         }
+        Destroy(gameObject);
 
     }
 }
