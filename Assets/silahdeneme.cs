@@ -1,4 +1,8 @@
+using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class silahdeneme : MonoBehaviour
@@ -27,20 +31,31 @@ public class silahdeneme : MonoBehaviour
 
     public int mag = 5;
     public int ammo = 30;
+    public int magAmmo = 30;
 
     private AudioSource audioSource;
 
     public Transform spawnPoint;
     public float shootForce = 10f;
+
+    public Image crossHair;
+    RaycastHit hit;
+
+    public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI magText;
+    public Image ammoCircle;
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
-
         recoilLength = 0;
         recoverLength = 1 / fireRate * recoverPercent;
+
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+        SetAmmo();
     }
     private void Update()
     {
@@ -67,35 +82,55 @@ public class silahdeneme : MonoBehaviour
         {
             Recover();
         }
+
+    }
+
+    void SetAmmo()
+    {
+        ammoCircle.fillAmount = (float)ammo / magAmmo;
+    }
+    public void OnEnemyHit()
+    {
+        crossHair.color = Color.red; // Crosshair rengini kýrmýzý yap
+        StartCoroutine(ResetCrossHairColor()); // Bir süre sonra rengi beyaza döndür
+    }
+
+    // Niþangah rengini tekrar beyaza döndüren Coroutine
+    private IEnumerator ResetCrossHairColor()
+    {
+        yield return new WaitForSeconds(.2f); // 1 saniye bekle
+        crossHair.color = Color.white; // Niþangah rengini tekrar beyaz yap
     }
     void Reload()
     {
-
         if (mag > 0)
         {
             mag--;
             ammo = 30;
         }
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+        SetAmmo();
     }
 
 
     void shoot()
     {
+        crossHair.color = Color.white;
         audioSource.Play();
         recoiling = true;
         recovering = false;
 
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, 100f))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, 2000f))
         {
 
             Vector3 targetPoint;
             if (Physics.Raycast(ray, out hit))
                 targetPoint = hit.point;
             else
-                targetPoint = ray.GetPoint(150);
+                targetPoint = ray.GetPoint(300);
 
 
             Debug.Log(hit.transform);
@@ -103,8 +138,13 @@ public class silahdeneme : MonoBehaviour
             {
                 var enemy = hit.transform.GetComponent<Enemy>();
                 enemy.TakeDamage(25);
+                enemy.GetComponent<Rigidbody>().AddForce(-enemy.gameObject.transform.forward * 20f, ForceMode.Impulse);
+                OnEnemyHit();
+
             }
-            Vector3 directionWithoutSpread = targetPoint - cam.transform.position;
+            else
+                crossHair.color = Color.white;
+            Vector3 directionWithoutSpread = targetPoint - spawnPoint.position;
             GameObject currentBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
             currentBullet.transform.forward = directionWithoutSpread.normalized;
 
@@ -112,6 +152,9 @@ public class silahdeneme : MonoBehaviour
             Destroy(currentBullet, .4f);
         }
         ammo--;
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+        SetAmmo();
     }
 
     void Recoil()
