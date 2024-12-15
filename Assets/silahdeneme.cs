@@ -1,7 +1,9 @@
 using UnityEngine;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class silahdeneme : MonoBehaviour
 {
+    public GameObject bullet;
 
     public Camera cam;
     public float nextFire;
@@ -22,6 +24,18 @@ public class silahdeneme : MonoBehaviour
 
     private bool recoiling;
     private bool recovering;
+
+    public int mag = 5;
+    public int ammo = 30;
+
+    private AudioSource audioSource;
+
+    public Transform spawnPoint;
+    public float shootForce = 10f;
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
 
@@ -34,10 +48,14 @@ public class silahdeneme : MonoBehaviour
             nextFire -= Time.deltaTime;
 
 
-        if (Input.GetKey(KeyCode.Mouse0) && nextFire <= 0)
+        if (Input.GetKey(KeyCode.Mouse0) && nextFire <= 0 && ammo > 0)
         {
             nextFire = 1 / fireRate;
             shoot();
+        }
+        if ((Input.GetKeyDown(KeyCode.R) && mag > 0) || (mag > 0 && ammo == 0))
+        {
+            Reload();
         }
 
 
@@ -50,9 +68,20 @@ public class silahdeneme : MonoBehaviour
             Recover();
         }
     }
+    void Reload()
+    {
+
+        if (mag > 0)
+        {
+            mag--;
+            ammo = 30;
+        }
+    }
+
 
     void shoot()
     {
+        audioSource.Play();
         recoiling = true;
         recovering = false;
 
@@ -61,13 +90,28 @@ public class silahdeneme : MonoBehaviour
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 100f))
         {
+
+            Vector3 targetPoint;
+            if (Physics.Raycast(ray, out hit))
+                targetPoint = hit.point;
+            else
+                targetPoint = ray.GetPoint(150);
+
+
             Debug.Log(hit.transform);
             if (hit.transform.GetComponent<Enemy>())
             {
                 var enemy = hit.transform.GetComponent<Enemy>();
                 enemy.TakeDamage(25);
             }
+            Vector3 directionWithoutSpread = targetPoint - spawnPoint.position;
+            GameObject currentBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
+            currentBullet.transform.forward = directionWithoutSpread.normalized;
+
+            currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread * shootForce, ForceMode.Impulse);
+            Destroy(currentBullet, .4f);
         }
+        ammo--;
     }
 
     void Recoil()
