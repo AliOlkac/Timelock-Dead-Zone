@@ -1,10 +1,15 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
+    public float health = 100;
+
+
     CharacterController controller;
     [SerializeField] float normalSpeed = 5f;
     [SerializeField] float sprintSpeed = 8f;
@@ -32,7 +37,8 @@ public class Movement : MonoBehaviour
 
     private bool isWalking = false;
     public silahdeneme silahDeneme;
-
+    public Image healthCircle;
+    public TextMeshProUGUI healthText;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,7 +47,11 @@ public class Movement : MonoBehaviour
         jointOriginalPos = joint.localPosition;
 
     }
-
+    private void Start()
+    {
+        healthText.text = health.ToString();
+        SetHealth();
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.name == "AmmoBox" && Input.GetKey(KeyCode.E))
@@ -52,12 +62,18 @@ public class Movement : MonoBehaviour
 
         }
     }
+    void SetHealth()
+    {
+        healthCircle.fillAmount = (float)health / 100;
+    }
+    public void takeDamage(float damage)
+    {
+        health -= damage;
+        healthText.text = health.ToString();
+        SetHealth();
+    }
     private void Update()
     {
-
-
-
-
         if (enableHeadBob)
         {
             HeadBob();
@@ -76,6 +92,8 @@ public class Movement : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+
     }
 
     private void HeadBob()
