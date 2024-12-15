@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-using UnityEditor.EditorTools;
 
 public class Enemy : MonoBehaviour
 {
