@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,7 @@ public class silahdeneme : MonoBehaviour
 
     public int mag = 5;
     public int ammo = 30;
+    public int magAmmo = 30;
 
     private AudioSource audioSource;
 
@@ -39,15 +41,21 @@ public class silahdeneme : MonoBehaviour
     public Image crossHair;
     RaycastHit hit;
 
+    public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI magText;
+    public Image ammoCircle;
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
-
         recoilLength = 0;
         recoverLength = 1 / fireRate * recoverPercent;
+
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+        SetAmmo();
     }
     private void Update()
     {
@@ -76,6 +84,11 @@ public class silahdeneme : MonoBehaviour
         }
 
     }
+
+    void SetAmmo()
+    {
+        ammoCircle.fillAmount = (float)ammo / magAmmo;
+    }
     public void OnEnemyHit()
     {
         crossHair.color = Color.red; // Crosshair rengini kýrmýzý yap
@@ -90,12 +103,14 @@ public class silahdeneme : MonoBehaviour
     }
     void Reload()
     {
-
         if (mag > 0)
         {
             mag--;
             ammo = 30;
         }
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+        SetAmmo();
     }
 
 
@@ -137,6 +152,9 @@ public class silahdeneme : MonoBehaviour
             Destroy(currentBullet, .4f);
         }
         ammo--;
+        magText.text = mag.ToString();
+        ammoText.text = ammo + "/" + magAmmo;
+        SetAmmo();
     }
 
     void Recoil()
