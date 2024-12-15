@@ -638,7 +638,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -848,6 +848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4878654862120807133, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 7787443656933073756, guid: d659c6dd89b7a184ab5041874756826c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
