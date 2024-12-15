@@ -19,15 +19,32 @@ public class Movement : MonoBehaviour
 
     AudioSource audioSource;
     private bool isPlayingSound = false; // Sesin çalýp çalmadýðýný kontrol etmek için
-    public NewWeapon newWeapon;
+
+    public bool enableHeadBob = false;
+    public Transform joint;
+    public float bobSpeed = 10f;
+    public Vector3 bobAmount = new Vector3(.15f, .05f, 0f);
+
+    // Internal Variables
+    private Vector3 jointOriginalPos;
+    private float timer = 0;
+
+    private bool isWalking = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+        jointOriginalPos = joint.localPosition;
+
     }
     private void Update()
     {
+        if (enableHeadBob)
+        {
+            HeadBob();
+        }
         float speed = (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : normalSpeed);
         moveHandle(speed);
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -44,6 +61,23 @@ public class Movement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+    private void HeadBob()
+    {
+        if (isWalking)
+        {
+            // Calculates HeadBob speed during sprint
+
+            timer += Time.deltaTime * bobSpeed;
+            // Applies HeadBob movement
+            joint.localPosition = new Vector3(jointOriginalPos.x + Mathf.Sin(timer) * bobAmount.x, jointOriginalPos.y + Mathf.Sin(timer) * bobAmount.y, jointOriginalPos.z + Mathf.Sin(timer) * bobAmount.z);
+        }
+        else
+        {
+            // Resets when play stops moving
+            timer = 0;
+            joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
+        }
+    }
     void moveHandle(float _speed)
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -51,6 +85,9 @@ public class Movement : MonoBehaviour
         Vector3 moveDir = transform.forward * vertical + transform.right * horizontal;
         if (moveDir.magnitude != 0)
         {
+            isWalking = true;
+            enableHeadBob = true;
+
             if (!isPlayingSound) // Ses çalmýyorsa
             {
                 StartCoroutine(playWalkSound());
@@ -58,6 +95,8 @@ public class Movement : MonoBehaviour
         }
         else
         {
+            isWalking = false;
+            enableHeadBob = false;
             // Eðer duruyorsa sesi durdur
             if (isPlayingSound)
             {
