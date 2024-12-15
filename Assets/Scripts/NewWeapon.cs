@@ -85,7 +85,7 @@ public class NewWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
             targetPoint = hit.point;
         else
-            targetPoint = ray.GetPoint(75); //Just a point far away from the player
+            targetPoint = ray.GetPoint(100); //Just a point far away from the player
 
         //Calculate direction from attackPoint to targetPoint
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;

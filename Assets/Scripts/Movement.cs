@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,11 +17,14 @@ public class Movement : MonoBehaviour
     public LayerMask groundMask;
     public bool isGrounded;
 
-
+    AudioSource audioSource;
+    private bool isPlayingSound = false; // Sesin çalýp çalmadýðýný kontrol etmek için
+    public NewWeapon newWeapon;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -34,17 +38,45 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
     void moveHandle(float _speed)
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 moveDir = transform.forward * vertical + transform.right * horizontal;
+        if (moveDir.magnitude != 0)
+        {
+            if (!isPlayingSound) // Ses çalmýyorsa
+            {
+                StartCoroutine(playWalkSound());
+            }
+        }
+        else
+        {
+            // Eðer duruyorsa sesi durdur
+            if (isPlayingSound)
+            {
+                audioSource.Stop();
+                isPlayingSound = false;
+            }
+        }
+
         controller.Move(moveDir.normalized * Time.deltaTime * _speed);
-
-
+    }
+    IEnumerator playWalkSound()
+    {
+        isPlayingSound = true; // Ses çalýyor
+        if (Input.GetKey(KeyCode.LeftShift))
+            audioSource.pitch = 2f;
+        else
+            audioSource.pitch = 1.5f;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length / audioSource.pitch); // Sesin uzunluðu kadar bekle
+        isPlayingSound = false; // Ses bitti
     }
 }
