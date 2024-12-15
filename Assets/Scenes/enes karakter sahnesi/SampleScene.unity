@@ -394,7 +394,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20.3, y: 23.5}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398401211
 MonoBehaviour:
@@ -434,6 +434,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398401209}
   m_CullTransparentMesh: 1
+--- !u!1 &403707636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3969594342295132232, guid: b486745e7366c5b458901947af49b285, type: 3}
+  m_PrefabInstance: {fileID: 6102465260161834687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &403707642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403707636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aae9d46e74dbe34692827cf69e32398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 949366711}
+  bullet: {fileID: 4372363420877005204, guid: 8d2e72494ea030c4fa3570cff8e49303, type: 3}
+  attackPoint: {fileID: 678966526}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +575,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!4 &678966526 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+  m_PrefabInstance: {fileID: 6102465260161834687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +629,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &949366711 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6748174712678623047, guid: b486745e7366c5b458901947af49b285, type: 3}
+  m_PrefabInstance: {fileID: 6102465260161834687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1399324604
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,11 +881,46 @@ PrefabInstance:
     - target: {fileID: 4878654862120807133, guid: b486745e7366c5b458901947af49b285, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 4877713809593290297, guid: 8d2e72494ea030c4fa3570cff8e49303, type: 3}
+      objectReference: {fileID: 4372363420877005204, guid: 8d2e72494ea030c4fa3570cff8e49303, type: 3}
+    - target: {fileID: 4878654862120807133, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878654862120807133, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: muzzleFlash
+      value: 
+      objectReference: {fileID: 4744938886636976336, guid: bfcfc69cf05804740b55d9f24239463b, type: 3}
+    - target: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.756
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869599081688543147, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3969594342295132232, guid: b486745e7366c5b458901947af49b285, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 403707642}
   m_SourcePrefab: {fileID: 100100000, guid: b486745e7366c5b458901947af49b285, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

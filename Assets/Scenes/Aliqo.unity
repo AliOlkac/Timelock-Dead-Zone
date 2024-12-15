@@ -287,6 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1044749323}
+  nextFire: 0
+  fireRate: 10
 --- !u!1 &245543938
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +721,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  health: 100
+  health: 500
   walkPointRange: 5
   timeBetweenAttacks: 1
   sightRange: 10

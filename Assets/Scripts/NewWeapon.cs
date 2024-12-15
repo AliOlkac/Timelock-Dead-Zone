@@ -103,8 +103,10 @@ public class NewWeapon : MonoBehaviour
         audioSource.Play();
         //Instantiate muzzle flash, if you have one
         if (muzzleFlash != null)
-            Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
-
+        {
+            GameObject MuzzleFlash = Instantiate(muzzleFlash, attackPoint.position, Quaternion.Euler(0, -90, 0));
+            Destroy(MuzzleFlash, 0.1f);
+        }
         bulletsLeft--;
         bulletsShot++;
 
