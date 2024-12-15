@@ -17042,6 +17042,10 @@ PrefabInstance:
       value: Zombie (3)
       objectReference: {fileID: 0}
     - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1187599757}
@@ -19046,6 +19050,10 @@ PrefabInstance:
       value: Zombie (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1187599757}
@@ -20713,6 +20721,10 @@ PrefabInstance:
     - target: {fileID: 646687273847409158, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
       propertyPath: m_Name
       value: Zombie (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
       propertyPath: player
@@ -36757,6 +36769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5411497051022560153, guid: b486745e7366c5b458901947af49b285, type: 3}
+      propertyPath: geriSekme
+      value: 454.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37692,6 +37708,10 @@ PrefabInstance:
     - target: {fileID: 646687273847409158, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5500340945132391690, guid: de00b5c4b9416fb45bd2e826f5019c3a, type: 3}
       propertyPath: player

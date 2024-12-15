@@ -769,6 +769,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 6748174712678623047}
+    - target: {fileID: 4179100684475199511, guid: d42451ece8e0e6643891a20415ce3cbd, type: 3}
+      propertyPath: crossHair
+      value: 
+      objectReference: {fileID: 3652261832000806102}
     - target: {fileID: 5039685273405662150, guid: d42451ece8e0e6643891a20415ce3cbd, type: 3}
       propertyPath: m_Name
       value: SciFiGunLightBlack
