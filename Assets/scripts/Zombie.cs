@@ -34,16 +34,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void TakeDamage(int _damage)
-    {
-        health -= _damage;
-
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+   
     void Start()
     {
 
@@ -168,7 +159,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage) // Düşmanın hasar almasını sağlar.
     {
         health -= damage;
-        hitEffect.Play();
+        //hitEffect.Play();
         StartCoroutine(TakeDamageCoroutine());
 
         if (health <= 0)

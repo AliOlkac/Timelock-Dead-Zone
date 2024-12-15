@@ -45,7 +45,6 @@ public class NewWeapon : MonoBehaviour
     private void Update()
     {
         MyInput();
-
         //Set ammo display, if it exists :D
         if (ammunitionDisplay != null)
             ammunitionDisplay.SetText(bulletsLeft + " / " + magazineSize);
@@ -108,7 +107,6 @@ public class NewWeapon : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot++;
-       
 
         //Invoke resetShot function (if not already invoked), with your timeBetweenShooting
         if (allowInvoke)
