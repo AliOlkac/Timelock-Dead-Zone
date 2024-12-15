@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -30,6 +31,7 @@ public class Movement : MonoBehaviour
     private float timer = 0;
 
     private bool isWalking = false;
+    public silahdeneme silahDeneme;
 
     private void Awake()
     {
@@ -39,8 +41,23 @@ public class Movement : MonoBehaviour
         jointOriginalPos = joint.localPosition;
 
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.name == "AmmoBox" && Input.GetKey(KeyCode.E))
+        {
+            Debug.Log(other.transform);
+            Destroy(other.gameObject);
+            silahDeneme.mag += 1;
+
+        }
+    }
     private void Update()
     {
+
+
+
+
         if (enableHeadBob)
         {
             HeadBob();
