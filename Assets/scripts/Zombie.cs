@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
     private void ChasePlayer() // Oyuncuyu takip etmek için kullanılan fonksiyon.
     {
         navAgent.SetDestination(player.position);
-        animator.SetFloat("Velocity", 0.6f);
+        animator.SetFloat("Velocity", 0.5f);
         navAgent.isStopped = false; // Düşmanın hareket etmesini sağlar.
     }
 
