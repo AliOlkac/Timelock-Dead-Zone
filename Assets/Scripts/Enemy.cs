@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-   
+
     void Start()
     {
 
@@ -135,15 +135,11 @@ public class Enemy : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange)) // Düşmanın saldırı menzilinde bir şey var mı kontrol eder.
             {
-                /*
-                    YOU CAN USE THIS TO GET THE PLAYER HUD AND CALL THE TAKE DAMAGE FUNCTION
 
-                PlayerHUD playerHUD = hit.transform.GetComponent<PlayerHUD>();
-                if (playerHUD != null)
-                {
-                   playerHUD.takeDamage(damage);
-                }
-                 */
+
+                var playerRef = hit.transform.GetComponent<Movement>();
+                playerRef.takeDamage(damage);
+
             }
         }
     }

@@ -15204,9 +15204,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4245789455621105026, guid: b486745e7366c5b458901947af49b285, type: 3}
-      propertyPath: silahDeneme
-      value: 
-      objectReference: {fileID: 1732927390}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4820535922083847229, guid: b486745e7366c5b458901947af49b285, type: 3}
       propertyPath: m_Name
       value: Player
@@ -35375,17 +35375,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 113eb02b1f4058248bf628b2fde16564, type: 3}
---- !u!114 &1732927390 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5411497051022560153, guid: b486745e7366c5b458901947af49b285, type: 3}
-  m_PrefabInstance: {fileID: 727950636}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aae9d46e74dbe34692827cf69e32398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1732944099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 433038, guid: 5d6e0b09bf6588c4194b0574def66713, type: 3}
