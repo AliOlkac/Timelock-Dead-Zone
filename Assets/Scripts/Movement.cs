@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour
     public TextMeshProUGUI healthText;
 
     public bool isGamePaused = false;
+
+    public GameObject pauseScreen ;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,6 +55,7 @@ public class Movement : MonoBehaviour
     {
         healthText.text = health.ToString();
         SetHealth();
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnTriggerStay(Collider other)
     {
@@ -73,10 +76,14 @@ public class Movement : MonoBehaviour
         {
 
             Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            pauseScreen.SetActive(true);
         }
         else
         {
             Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            pauseScreen.SetActive(false);
         }
     }
     void SetHealth()
@@ -91,7 +98,7 @@ public class Movement : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }
