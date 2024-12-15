@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectDecetion : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
