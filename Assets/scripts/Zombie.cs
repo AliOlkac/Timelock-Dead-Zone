@@ -159,7 +159,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage) // Düşmanın hasar almasını sağlar.
     {
         health -= damage;
-        //hitEffect.Play();
+        hitEffect.Play();
         StartCoroutine(TakeDamageCoroutine());
 
         if (health <= 0)
@@ -191,8 +191,8 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DestroyEnemyCoroutine()// Düşmanın yok
     {
-        animator.SetBool("Dead", true);
-        yield return new WaitForSeconds(1.8f);
+        animator.Play("Z_FallingBack");
+        yield return new WaitForSeconds(2.20f);
         Destroy(gameObject);
     }
 
