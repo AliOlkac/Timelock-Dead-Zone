@@ -104,7 +104,7 @@ public class silahdeneme : MonoBehaviour
                 var enemy = hit.transform.GetComponent<Enemy>();
                 enemy.TakeDamage(25);
             }
-            Vector3 directionWithoutSpread = targetPoint - spawnPoint.position;
+            Vector3 directionWithoutSpread = targetPoint - cam.transform.position;
             GameObject currentBullet = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
             currentBullet.transform.forward = directionWithoutSpread.normalized;
 
