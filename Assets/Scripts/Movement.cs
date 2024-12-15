@@ -39,6 +39,8 @@ public class Movement : MonoBehaviour
     public silahdeneme silahDeneme;
     public Image healthCircle;
     public TextMeshProUGUI healthText;
+
+    public bool isGamePaused = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,12 +56,27 @@ public class Movement : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "AmmoBox" && Input.GetKey(KeyCode.E))
+        if (other.CompareTag("Cube") && Input.GetKey(KeyCode.E))
         {
             Debug.Log(other.transform);
             Destroy(other.gameObject);
             silahDeneme.mag += 1;
 
+        }
+    }
+
+
+    void PauseGame()
+    {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused)
+        {
+
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
     void SetHealth()
@@ -74,6 +91,12 @@ public class Movement : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+
+
         if (enableHeadBob)
         {
             HeadBob();

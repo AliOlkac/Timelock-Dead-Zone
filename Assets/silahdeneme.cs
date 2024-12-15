@@ -59,6 +59,8 @@ public class silahdeneme : MonoBehaviour
     }
     private void Update()
     {
+        SetAmmo();
+
         if (nextFire > 0)
             nextFire -= Time.deltaTime;
 
