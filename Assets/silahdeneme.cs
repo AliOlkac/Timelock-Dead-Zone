@@ -93,15 +93,15 @@ public class silahdeneme : MonoBehaviour
     }
     public void OnEnemyHit()
     {
-        crossHair.color = Color.red; // Crosshair rengini kýrmýzý yap
-        StartCoroutine(ResetCrossHairColor()); // Bir süre sonra rengi beyaza döndür
+        crossHair.color = Color.red; // Crosshair rengini kï¿½rmï¿½zï¿½ yap
+        StartCoroutine(ResetCrossHairColor()); // Bir sï¿½re sonra rengi beyaza dï¿½ndï¿½r
     }
 
-    // Niþangah rengini tekrar beyaza döndüren Coroutine
+    // Niï¿½angah rengini tekrar beyaza dï¿½ndï¿½ren Coroutine
     private IEnumerator ResetCrossHairColor()
     {
         yield return new WaitForSeconds(.2f); // 1 saniye bekle
-        crossHair.color = Color.white; // Niþangah rengini tekrar beyaz yap
+        crossHair.color = Color.white; // Niï¿½angah rengini tekrar beyaz yap
     }
     void Reload()
     {
@@ -140,7 +140,7 @@ public class silahdeneme : MonoBehaviour
             {
                 var enemy = hit.transform.GetComponent<Enemy>();
                 enemy.TakeDamage(25);
-                enemy.GetComponent<Rigidbody>().AddForce(-enemy.gameObject.transform.forward * 20f, ForceMode.Impulse);
+
                 OnEnemyHit();
 
             }
