@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     public bool isGrounded;
 
     AudioSource audioSource;
-    private bool isPlayingSound = false; // Sesin çalýp çalmadýðýný kontrol etmek için
+    private bool isPlayingSound = false; // Sesin ?al?p ?almad???n? kontrol etmek i?in
 
     public bool enableHeadBob = false;
     public Transform joint;
@@ -95,6 +95,7 @@ public class Movement : MonoBehaviour
         health -= damage;
         healthText.text = health.ToString();
         SetHealth();
+        
     }
     private void Update()
     {
@@ -153,7 +154,7 @@ public class Movement : MonoBehaviour
             isWalking = true;
             enableHeadBob = true;
 
-            if (!isPlayingSound) // Ses çalmýyorsa
+            if (!isPlayingSound) // Ses ?alm?yorsa
             {
                 StartCoroutine(playWalkSound());
             }
@@ -162,7 +163,7 @@ public class Movement : MonoBehaviour
         {
             isWalking = false;
             enableHeadBob = false;
-            // Eðer duruyorsa sesi durdur
+            // E?er duruyorsa sesi durdur
             if (isPlayingSound)
             {
                 audioSource.Stop();
@@ -174,13 +175,13 @@ public class Movement : MonoBehaviour
     }
     IEnumerator playWalkSound()
     {
-        isPlayingSound = true; // Ses çalýyor
+        isPlayingSound = true; // Ses ?al?yor
         if (Input.GetKey(KeyCode.LeftShift))
             audioSource.pitch = 2f;
         else
             audioSource.pitch = 1.5f;
         audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length / audioSource.pitch); // Sesin uzunluðu kadar bekle
+        yield return new WaitForSeconds(audioSource.clip.length / audioSource.pitch); // Sesin uzunlu?u kadar bekle
         isPlayingSound = false; // Ses bitti
     }
 }

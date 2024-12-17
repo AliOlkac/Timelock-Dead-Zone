@@ -187,7 +187,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator DestroyEnemyCoroutine()// Düşmanın yok
     {
         animator.Play("Z_FallingBack");
-        yield return new WaitForSeconds(2.20f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 
